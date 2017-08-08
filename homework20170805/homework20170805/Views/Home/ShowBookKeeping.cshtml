@@ -1,0 +1,44 @@
+﻿@model IEnumerable<homework20170805.Models.AccountViewModel>
+@using homework20170805.Models
+
+@{
+    Layout = null;
+}
+
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th>#</th>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+
+        </tr>
+        @{ var cnt = 1; }
+        @foreach (var item in Model)
+        {
+            <tr style ="color:@(item.Type==AccountType.支出 ? "Red" : "Black") ">
+                <td>   
+                @(cnt++)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+
+            </tr>
+        }
+
+    </table>
+
+
