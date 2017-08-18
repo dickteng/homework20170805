@@ -31,7 +31,9 @@ namespace homework20170805.Controllers
 
         public ActionResult ShowBookKeeping()
         {
-            var data = dao.GetAllAccounts();
+
+            AccountService data=new AccountService();
+            //var data = dao.GetAllAccounts();
             //var data = new List<AccountViewModel>()
             //{
             //    new AccountViewModel{Type=AccountType.收入,Date=new DateTime(2017,08,01),Amount=150},
@@ -44,7 +46,7 @@ namespace homework20170805.Controllers
             //    new AccountViewModel{Type=AccountType.收入,Date=new DateTime(2017,08,04),Amount=170}
             //};
 
-            return View(data);
+            return View( data.Getdata());
         }
     }
 }
