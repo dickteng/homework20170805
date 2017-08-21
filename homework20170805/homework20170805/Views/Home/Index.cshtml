@@ -1,49 +1,67 @@
-﻿
+﻿@model homework20170805.Models.AccountBook
 @{
     ViewBag.Title = "記帳本";
     Layout = "~/Views/Shared/_BookKeeping.cshtml";
 }
-<div class="well">
-    <form class="form-horizontal">
-        <div class="form-group">
-            <label for="category" class="col-sm-2 control-label">類別</label>
-            <div class="col-sm-10">
-                <select id="category" class="form-control">
-                    <option value="" selected>請選擇</option>
-                    <option>支出</option>
-                    <option>收入</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="money" class="col-sm-2 control-label">金額</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="money" placeholder="金額">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="date" class="col-sm-2 control-label">日期</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="date" placeholder="日期">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="description" class="col-sm-2 control-label">備註</label>
-            <div class="col-sm-10">
-                <textarea class="form-control" id="description">
-                </textarea>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-offset-8 col-sm-4">
-                <button type="submit" class="btn btn-default">送出</button>
-            </div>
-        </div>
-    </form>
-</div>
-<div class="row">
-    <div class="col-md-12">       
-            @Html.Action("ShowBookKeeping")
-</div>
-</div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
 
+    <div class="well">
+        <div class="form-horizontal">
+
+            @Html.ValidationSummary(true)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Categoryyy, new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    <select id="Categoryyy" class="form-control">
+                        <option value="" selected>請選擇</option>
+                        <option>支出</option>
+                        <option>收入</option>
+                    </select>
+                    @Html.ValidationMessageFor(model => model.Id)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Amounttt, new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Amounttt, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.Amounttt)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Dateee, new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Dateee, new {htmlAttributes = new {@class = "form-control", placeholder = "mm/dd/yyyy" } })
+                    @Html.ValidationMessageFor(model => model.Dateee)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Remarkkk, new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Remarkkk, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.Remarkkk)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-8 col-sm-4">
+                    <input type="submit" value="送出" class="btn btn-default"/>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-12">
+        @Html.Action("ShowBookKeeping")
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
