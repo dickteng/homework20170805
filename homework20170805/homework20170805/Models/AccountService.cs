@@ -18,5 +18,10 @@ namespace homework20170805.Models
        {
            return _dao.GetAllAccounts();
        }
+
+       public void SaveChanges(AccountBook accountbook)
+       {
+           int a=_dao.Insert(accountbook);
+       }
    }
 }

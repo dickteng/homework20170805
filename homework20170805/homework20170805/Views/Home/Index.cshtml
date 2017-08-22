@@ -3,7 +3,7 @@
     ViewBag.Title = "記帳本";
     Layout = "~/Views/Shared/_BookKeeping.cshtml";
 }
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create","home",FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -15,12 +15,8 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Categoryyy, new {@class = "control-label col-md-2"})
                 <div class="col-md-10">
-                    <select id="Categoryyy" class="form-control">
-                        <option value="" selected>請選擇</option>
-                        <option>支出</option>
-                        <option>收入</option>
-                    </select>
-                    @Html.ValidationMessageFor(model => model.Id)
+                    @Html.EnumDropDownListFor(d => d.Categoryyy, new {@class = "form-control"})
+                    @Html.ValidationMessageFor(model => model.Categoryyy)
                 </div>
             </div>
 
@@ -43,7 +39,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Remarkkk, new {@class = "control-label col-md-2"})
                 <div class="col-md-10">
-                    @Html.TextAreaFor(model => model.Remarkkk, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.TextAreaFor(model => model.Remarkkk,3,40, new {htmlAttributes = new {@class = "form-control"}})
                     @Html.ValidationMessageFor(model => model.Remarkkk)
                 </div>
             </div>

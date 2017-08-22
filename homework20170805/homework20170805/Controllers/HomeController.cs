@@ -9,6 +9,7 @@ namespace homework20170805.Controllers
 {
     public class HomeController : Controller
     {
+        private AccountService data = new AccountService();
         public ActionResult Index()
         {
             return View();
@@ -30,8 +31,21 @@ namespace homework20170805.Controllers
 
         public ActionResult ShowBookKeeping()
         {
-            AccountService data=new AccountService();
+            //AccountService data=new AccountService();
             return View( data.Getdata());
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(AccountBook accountbook)
+        {
+            if (ModelState.IsValid)
+            {
+                data.SaveChanges(accountbook);
+            }
+
+            return RedirectToAction("Index");
+        }
+
     }
 }
