@@ -1,5 +1,7 @@
-﻿@model IEnumerable<homework20170805.Models.AccountViewModel>
+﻿@model IPagedList<homework20170805.Models.AccountViewModel>
 @using homework20170805.Models
+@using PagedList
+@using PagedList.Mvc
 
 @{
     Layout = null;
@@ -9,13 +11,13 @@
         <tr>
             <th>#</th>
             <th>
-                @Html.DisplayNameFor(model => model.Type)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Type)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Date)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Date)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Amount)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Amount)
             </th>
 
         </tr>
@@ -49,5 +51,5 @@
         <tr><td>小計</td><td colspan="3" class="NumRight @MyClass">@(ttl.ToString("N0"))</td></tr>
 
     </table>
-
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
 

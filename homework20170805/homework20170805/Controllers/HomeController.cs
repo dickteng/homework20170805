@@ -4,12 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using homework20170805.Models;
+using PagedList;
 
 namespace homework20170805.Controllers
 {
     public class HomeController : Controller
     {
         private AccountService data = new AccountService();
+        private int pageSize = 15;
         public ActionResult Index()
         {
             return View();
@@ -29,10 +31,10 @@ namespace homework20170805.Controllers
             return View();
         }
 
-        public ActionResult ShowBookKeeping()
+        public ActionResult ShowBookKeeping(int page=1)
         {
-            //AccountService data=new AccountService();
-            return View( data.Getdata());
+            int currentPage = page < 1 ? 1 : page;
+            return View( data.Getdata().ToPagedList(currentPage,pageSize));
         }
 
         [HttpPost]
