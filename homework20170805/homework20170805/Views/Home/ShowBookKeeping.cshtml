@@ -22,14 +22,16 @@
         @{ 
             var cnt = 1;
             var ttl = 0;
+            string MyClass = "";
             }
         @foreach (var item in Model)
         {
-           ttl = ttl + item.Amount*(item.Type==AccountType.支出 ? -1 : 1);
-           
-        <tr style ="color:@(item.Type==AccountType.支出 ? "Red" : "Black") ">
+            ttl = ttl + item.Amount*(item.Type==AccountType.支出 ? -1 : 1);
+            MyClass = item.Type == AccountType.支出 ? "Expend" : "Income";
+ 
+            <tr class ="@MyClass" >
                 <td>   
-                @(cnt++)
+                    @(cnt++)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Type)
@@ -37,13 +39,14 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Date)
                 </td>
-                <td style="text-align:right">
+                <td class="NumRight">
                     @Html.DisplayFor(modelItem => item.Amount)
                 </td>
 
             </tr>
+            MyClass = ttl<0 ? "Expend" : "Income";
         }
-        <tr><td>小計</td><td colspan="3" style="text-align:right;color:@(ttl<0 ? "Red" : "Black")">@(ttl.ToString("N0"))</td></tr>
+        <tr><td>小計</td><td colspan="3" class="NumRight @MyClass">@(ttl.ToString("N0"))</td></tr>
 
     </table>
 
